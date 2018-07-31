@@ -1,0 +1,139 @@
+﻿<script type="text/javascript">
+    $(function () {
+
+        $("#ui_Finance_ChannelID_edit").combobox({
+            onSelect: function (record) {
+                var curValue = $('#ui_Finance_ChannelID_edit').combobox('getValue');
+                para = {};
+                para.action = "GetDateById";
+                para.Id = curValue;
+                $.ajax({
+                    url: "ashx/bg_Finance.ashx",
+                    data: para,
+                    type: "POST",
+                    dataType: "json",
+                    success: function (dataRow) {
+                        var jsonstr = eval(dataRow);
+
+                        $("#ui_Finance_BeginDate_edit").datebox('setValue', ChangeDateFormat(jsonstr.GetBeginDate));
+                        $("#ui_Finance_EndDate_edit").datebox('setValue', ChangeDateFormat(jsonstr.GetEndDate));
+                    }
+                });
+            }
+        });
+    })
+    function ChangeDateFormat(cellval) {
+
+        var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+        return date.getFullYear() + "-" + month + "-" + currentDate;
+
+    }
+</script>
+<div style="padding: 15px; overflow: hidden">
+    <form id="ui_Finance_editform" method="post" action="">
+        <table class="tableForm" width="100%">
+            <tr>
+                <th>
+                    结算名称：
+                </th>
+                <td>
+                    <input type="hidden" name="ID" id="ID" />
+                    <input type="text" name="ui_Finance_FinanceName_edit" id="ui_Finance_FinanceName_edit"
+                           class="easyui-validatebox" data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    引用渠道：
+                </th>
+                <td>
+                    <input  id="ui_Finance_ChannelID_edit" name="ui_Finance_ChannelID_edit" class="easyui-combobox" width="50px">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    客   户：
+                </th>
+                <td>
+                    <!--<select id="ui_Finance_ChannelID" name="ui_Finance_ChannelID"  style="width:50px;">
+                <option value="1">语文</option>
+                <option value="2">数学</option>
+            </select>-->
+                    <input id="ui_Finance_CustomersID_edit" name="ui_Finance_CustomersID_edit" class="easyui-combobox" width="50px">
+                    <!--<input id="ui_GetDate" value="查询日期" onclick="GetDateByChannelId()" type="button" />-->
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    状   态：
+                </th>
+                <td>
+                    <select id="ui_Finance_State_edit" name="ui_Finance_State_edit" width="150px">
+                        <option value="1">启  用</option>
+                        <option value="0">禁  用</option>
+                    </select>
+                    <!--<input id="ui_Finance_State_edit" name="ui_Finance_State_edit" class="easyui-combobox" width="50px">-->
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    结算类型：
+                </th>
+                <td>
+                    <select id="ui_Finance_FinanceType_edit" name="ui_Finance_FinanceType_edit" width="50px">
+                        <option value="0">月  结</option>
+                        <option value="1">周  结</option>
+                        <option value="2">日  结</option>
+                    </select>
+                    <!--<input id="ui_Finance_FinanceType_edit" name="ui_Finance_FinanceType_edit" class="easyui-combobox" width="50px">-->
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    周期(天)：
+                </th>
+                <td>
+                    <input type="text" name="ui_Finance_FinanceNum_edit" id="ui_Finance_FinanceNum_edit"
+                           class="easyui-validatebox" data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    金额：
+                </th>
+                <td>
+                    <input type="text" name="ui_Finance_Amount_edit" id="ui_Finance_Amount_edit"
+                           class="easyui-validatebox" data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>规则开始时间</th>
+                <td>
+                    <input type="text" disabled="disabled" name="ui_Finance_BeginDate_edit" class="easyui-datebox" id="ui_Finance_BeginDate_edit">
+                </td>
+            </tr>
+            <tr>
+                <th>规则结束时间</th>
+                <td>
+                    <input type="text" name="ui_Finance_EndDate_edit" class="easyui-datebox" id="ui_Finance_EndDate_edit">
+                </td>
+            </tr>
+           
+            <tr>
+                <th>
+                    备注：
+                </th>
+                <td>
+                    <input type="text" name="ui_Finance_Remark_edit" id="ui_Finance_Remark_edit"
+                           class="easyui-validatebox" data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+

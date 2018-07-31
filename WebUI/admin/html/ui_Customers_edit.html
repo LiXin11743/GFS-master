@@ -1,0 +1,59 @@
+﻿<div style="padding: 15px; overflow: hidden">
+    <form id="ui_Customers_Customerseditform" method="post" action="">
+        <table class="tableForm" width="100%">
+
+            <tr>
+                <th>
+                    客户：
+                </th>
+                <td><input type="hidden" name="id" id="id" />
+                    <input type="text" name="ui_Customers_CusName_edit" id="ui_Customers_CusName_edit"
+                           class="easyui-validatebox" data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    状态：
+                </th>
+                <td>
+                    <select id="ui_Cutomers_State_edit" name="ui_Cutomers_State_edit" style="width: 70px;">
+                        <option value="0">禁用</option>
+                        <option value="1">启用</option>
+                    </select>
+                    <!--<input name="ui_department_sort_add" class="easyui-numberspinner" style="width: 70px;"
+                   value="10" data-options="min:1,max:100,editable:false">-->
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    使用途径：
+                </th>
+                <td>
+                    <select id="ui_Cutomers_CusType_edit" name="ui_Cutomers_CusType_edit" style="width: 70px;">
+                        <option value="0">个人</option>
+                        <option value="1">企业</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    等级：
+                </th>
+                <td>
+
+                    <input class="easyui-numberspinner" id="ui_Customers_CusLevel_edit" name="ui_Customers_CusLevel_edit" style="width: 70px;"
+                           value="1" data-options="min:1,max:100,editable:false">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    备注：
+                </th>
+                <td>
+                    <input type="text" name="ui_Customers_Remark_edit" id="ui_Customers_Remark_edit"
+                           data-options="required:true" autocomplete="off" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
